@@ -1,0 +1,16 @@
+class Solution {
+    HashMap<Integer,Integer> hm= new HashMap<Integer,Integer>();
+    public int minCostClimbingStairs(int[] cost) {
+        return helper(cost,-1);
+    }
+    
+    public int helper(int[] cost, int step){
+        if(hm.containsKey(step)){
+            return hm.get(step);
+        }
+        if(step>=cost.length-2)return 0;
+        int ans=Math.min(cost[step+1]+helper(cost,step+1), cost[step+2]+helper(cost,step+2));
+        hm.put(step,ans);
+        return ans;
+    }
+}
