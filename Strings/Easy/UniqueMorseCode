@@ -1,0 +1,12 @@
+class Solution {
+   public int uniqueMorseRepresentations(String[] words) {
+        return (int) Arrays.stream(words).map(Solution::transform).distinct().count();
+    }
+    
+    public static String transform(String word){
+        final String[] t  = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        StringBuilder out = new StringBuilder();
+        for(int i = 0; i < word.length(); ++i) out.append(t[word.charAt(i) - 'a']);
+        return out.toString();
+    }
+}
