@@ -1,0 +1,13 @@
+class Solution {
+    public boolean isValid(String S) {
+        StringBuilder sb = new StringBuilder(S);
+        while(true){
+            int ind = sb.indexOf("abc");
+            if(ind < 0)
+                break;
+
+            sb.delete(ind, ind+3);
+        }
+         return sb.length()==0 ? true : false;
+    }
+}
