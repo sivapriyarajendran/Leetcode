@@ -1,0 +1,52 @@
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+         List<Boolean> ans = new ArrayList<>();
+        for (String query : queries) {
+            if (match(query, pattern)) {
+                ans.add(true);
+            } else {
+                ans.add(false);
+            }
+        }
+        return ans;
+    }
+    
+     public boolean match(String s, String t) {
+        if (s.length() < t.length()) {
+            return false;
+        }
+        int ps = 0;
+        int pt = 0;
+        while (ps < s.length() && pt < t.length()) {
+            char schar = s.charAt(ps);
+            char tchar = t.charAt(pt);
+            if (schar >= 'A' && schar <= 'Z') {
+                if (schar != tchar) {
+                    return false;
+                } else {
+                    ps ++;
+                    pt ++;
+                }
+            } else {
+                if (schar != tchar) {
+                    ps ++;
+                } else {
+                    ps ++;
+                    pt ++;
+                }
+            }
+        }
+        if (pt < t.length()) {
+            return false;
+        }
+        while (ps < s.length()) {
+            char schar = s.charAt(ps);
+            if (schar >= 'A' && schar <= 'Z') {
+                return false;
+            } else {
+                ps ++;
+            }
+        }
+        return true;
+    }
+}
