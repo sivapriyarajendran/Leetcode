@@ -1,0 +1,40 @@
+class Solution {
+    public int findMinDifference(List<String> timePoints) {
+          
+            TreeMap<Integer,String> map = new TreeMap<Integer,String>();
+            int min = Integer.MAX_VALUE;
+            for(int i=0;i<timePoints.size();i++)
+            {
+                String[] time = timePoints.get(i).split("\\:+");
+                int val = Integer.parseInt(time[0])*60+Integer.parseInt(time[1]);
+                if(map.ceilingKey(val) != null)
+                {
+                    int h = java.lang.Math.abs(val - map.ceilingKey(val));
+                    if(min > h)
+                        min = h;
+                }
+                if(map.floorKey(val) != null)
+                {
+                    int h = java.lang.Math.abs(val - map.floorKey(val));
+                    if(min > h)
+                        min = h;
+                }
+                map.put(val,timePoints.get(i));
+                int val1 = val+1440;
+                if(map.ceilingKey(val1) != null)
+                {
+                    int h = java.lang.Math.abs(val1 - map.ceilingKey(val1));
+                    if(min > h)
+                        min = h;
+                }
+                if(map.floorKey(val1) != null)
+                {
+                    int h = java.lang.Math.abs(val1 - map.floorKey(val1));
+                    if(min > h)
+                        min = h;
+                }
+                map.put(val+1440,timePoints.get(i));
+            }
+            return min;
+    }
+}
