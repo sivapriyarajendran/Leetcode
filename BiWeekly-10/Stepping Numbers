@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> countSteppingNumbers(int low, int high) {
+        List<Integer> result = new ArrayList<>();
+        if (low > high) return result;
+        
+        Queue<Integer> q = new ArrayDeque<>();
+        for (int i = 1; i <= 9; i++) q.add(i);
+        
+        if (low == 0) result.add(0);
+        int prev=0;
+        while (!q.isEmpty()) {
+            int p = q.poll();
+            if (p <= high) {
+                int last = p % 10;
+                if (last > 0) q.add(p * 10 + last - 1);
+                if (last < 9) q.add(p * 10 + last + 1);
+            }
+            if (p >= low && p <= high) result.add(p);
+            
+        }
+        return result;
+    }
+}
