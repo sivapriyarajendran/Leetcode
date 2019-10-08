@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    // Complexity: 
+    // - Time: O(N), N is the node number of the tree
+    // - Space: O(h), h is the height of the tree
+    
+    int helper(TreeNode root, int sum, HashMap<Integer, Integer> prefixSum, int currentSum) {
+        if (root == null) return 0;
+        
+        currentSum += root.val;
+        int cntPrefixSumX = prefixSum.getOrDefault(currentSum - sum, 0);
+        prefixSum.put(currentSum, prefixSum.getOrDefault(currentSum, 0) + 1);
+        int total = cntPrefixSumX 
+            + helper(root.left, sum, prefixSum, currentSum) 
+            + helper(root.right, sum, prefixSum, currentSum);
+        prefixSum.put(currentSum, prefixSum.getOrDefault(currentSum, 0) - 1);
+    
+        return total;
+    }
+    
+    public int pathSum(TreeNode root, int sum) {
+        HashMap<Integer, Integer> prefixSum = new HashMap<>();
+        prefixSum.put(0, 1);
+        return helper(root, sum, prefixSum, 0);
+    }
+}
