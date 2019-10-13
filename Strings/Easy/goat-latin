@@ -1,0 +1,25 @@
+class Solution {
+    public String toGoatLatin(String S) {
+        String[] split=S.split(" ");
+        String result="";
+        String toAppend="a";
+        for(String word:split){
+            if(word.charAt(0)=='a'|| word.charAt(0)=='e'|| word.charAt(0)=='i'|| word.charAt(0)=='o'|| word.charAt(0)=='u' ||
+              word.charAt(0)=='A'|| word.charAt(0)=='E'|| word.charAt(0)=='I'|| word.charAt(0)=='O'|| word.charAt(0)=='U' ){
+                // word+="ma";
+                // System.out.println("first charc: "+word);
+            }else{
+                String value = word;
+                word = word.substring(1);
+                word+=(value.charAt(0)+"");
+                // System.out.println("non vowel charc: "+word);
+            }
+             word+="ma";
+            word+=toAppend;
+            toAppend+="a";
+            result+=word+" ";
+            // System.out.println(result);
+        }
+        return result.trim();
+    }
+}
