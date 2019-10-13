@@ -1,0 +1,22 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int[] map=new int[26];
+        char[] ch=new char[]{'b', 'a', 'l', 'l', 'o', 'o', 'n'};
+        char[] tc= text.toCharArray();
+        int count=0;
+        for(char c:tc){
+            map[c-'a']++;
+        }
+        boolean loop=true;
+        while(loop){
+            for(char c:ch){
+                map[c-'a']--;
+                if(map[c-'a']<0){
+                    return  count;
+                }
+            }
+            count++;
+        }
+     return count;   
+    }
+}
