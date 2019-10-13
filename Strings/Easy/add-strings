@@ -1,0 +1,33 @@
+class Solution {
+    public String addStrings(String num1, String num2) {
+       StringBuffer sb = new StringBuffer();
+        
+        int carry = 0;
+        int i = num1.length() -1;
+        int j = num2.length() -1;
+        int a,b,c;
+        
+        
+        while( i >=0 || j >=0 ){
+            a= 0; b = 0;
+            
+            if(i >= 0)
+            a = num1.charAt(i--) - '0' ;
+            
+            if(j >= 0)
+            b = num2.charAt(j--) - '0' ;
+             
+            c = a+b+carry;
+            
+            sb.append(c %10 );
+            carry = c / 10;
+            
+        }
+        
+        if(carry == 1){
+            sb.append("1");
+        }
+        
+        return sb.reverse().toString();
+    }
+}
